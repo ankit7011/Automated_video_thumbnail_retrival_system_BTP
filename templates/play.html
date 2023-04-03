@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Best Thumbnail</title>
+    <style>
+      body {
+        background-color: #FFE4B5;
+      }
+      img {
+        border: 2px solid #FFA500;
+        padding: 10px;
+        max-width: 40%; /* Decrease the width to 50% */
+        height: auto;
+      }
+      button {
+        background-color: #FF8C00;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 8px 45px;
+        cursor: pointer;
+        border-radius: 25px;
+        transition: background-color 0.3s ease;
+      }
+      button:hover {
+        background-color: #FFA500;
+      }
+      h1 {
+        font-family: Arial, Helvetica, sans-serif;
+        color: white;
+        font-weight: bold;
+        background-color: rgba(255, 140, 0, 0.8); /* fade the dark orange color */
+        padding: 10px;
+        border-top-left-radius: 10px; /* round the top-left corner of the header */
+        border-top-right-radius: 10px; /* round the top-right corner of the header */
+        margin-top: 0; /* remove the default margin for the h1 element */
+      }
+      div:first-child {
+        border-top-left-radius: 10px; /* round the top-left corner of the container */
+        border-top-right-radius: 10px; /* round the top-right corner of the container */
+        overflow: hidden; /* hide any content outside the container */
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="text-align:center;">Best Thumbnail</h1>
+    <div style="text-align:center;">
+      <img src="{{ url_for('static', filename='images/' + filename) }}" alt="Image">
+    </div>
+    <div style="text-align:center;">
+      <button onclick="redirectToExample()">Click to see the Character interaction Graph</button>
+      <button onclick="redirectToHome()">Go to Home Page</button>
+      <script>
+        function redirectToExample() {
+          window.location.href = "character_graph";
+        }
+        function redirectToHome() {
+          window.location.href = "/";
+        }
+      </script>
+    </div>
+  </body>
+</html>

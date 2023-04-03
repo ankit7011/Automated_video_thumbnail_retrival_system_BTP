@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Play Video</title>
+  </head>
+  <body>
+    <h1>Play Video</h1>
+    <!-- <video width="320" height="240" controls>
+      <source src="{{ url_for('static', filename='videos/' + filename) }}" type="video/mp4">
+    </video> -->
+    <!-- <img src="{{ url_for('static', filename='images/' + filename) }}" alt="My Image"> -->
+    	{% for path in new_paths %}
+        <img src="{{ path }}" alt="Image">
+      {% endfor %}
+  </body>
+</html>
