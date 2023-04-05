@@ -3,8 +3,22 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Automated Video Thumbnail</title>
-    <div class="class_1">
+    <title>Automated Video Thumbnail Retrival</title>
+    
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}" >
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init("user_KVIOqM1KGXMeSuAdcfsaa");
+        })();
+    </script>
+    <!-- <link rel="stylesheet" type="text/css" href="/static/style.css" > --> 
+    <!-- 1st with flask and 2nd with html live server -->
+
+</head>
+<body>
+    <!-- <div class="class_1">
         Welcome to Automated Video Thumbnail Retrival System
     </div>
     <div class="container">
@@ -12,13 +26,156 @@
             <input class="label_select" type="file" name="video" id="video">
             <button class="button_submit" type="submit">Upload</button>
         </form>
-    </div>
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}" >
-    <!-- <link rel="stylesheet" type="text/css" href="/static/style.css" > --> 
-    <!-- 1st with flask and 2nd with html live server -->
+    </div> -->
 
-</head>
-<body>
+    <div class="landing_page" id="landing_page">
+        
+        <div class="content3">
+            <div class="content_box_outerbox">
+                <div class="content_box">
+                    <div class="starting_lines_box">
+                        <span class='starting_lines'>B.TECH PROJECT</span>
+                        <span class='starting_lines' id='another_coloured_st'>FINAL</span>
+                    </div>
+                    <div class="catch_phrase" id="catch_phrase">
+                        <span>Automated Video Thumbnail <br> Retrival System</span>
+                    </div>
+                    <div class="another_text_box">
+                        <span class="useless">h</span>
+                        <span class="text1" id="text1">Upload Video </span>
+                        <!-- <span class="text1 second_text">Graphics</span> -->
+                    </div>
+                    <!-- <div class="subtext_box">
+                        <span class="catch_phrase" id="catch_phrase">With the brightest students and professors</span>
+                    </div> -->
+                    <div class="explore_button_box">
+                        <!-- <button class="explore_button">Upload</button> -->
+                        <form action="/upload" method="POST" enctype="multipart/form-data">
+                            <input class="explore_button" type="file" name="video" id="video">
+                            <button class="explore_button edited" type="submit">Upload</button>
+                        </form>
+                    </div>
     
+                </div>
+    
+                <div class="stuff_picture">
+                    <img src="../static/images/thumbnail.webp" alt="" id="stuff_landing_page">
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    
+    <div class="container1" id="team">
+        <div class="team_us_heading">Team Behind This Project</div>
+        <div class="sub_container">
+            <div class="sub_inner">
+                <div class="image"><img src="../static/witcher.jpg" alt=""
+                        class="image"></div>
+                <div class="sub_heading">Aniket Gupta</div>
+                <div class="sub_text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</div>
+            </div>
+            <div class="sub_inner">
+                <div class="image"><img src="../static/witcher.jpg" alt="" class="image">
+                </div>
+                <div class="sub_heading">Shreyans Jain</div>
+                <div class="sub_text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</div>
+            </div>
+            <div class="sub_inner">
+                <div class="image"><img src="../static/witcher.jpg" alt="" class="image">
+                </div>
+                <div class="sub_heading">Nikhil Grewal</div>
+                <div class="sub_text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</div>
+            </div>
+            <div class="sub_inner">
+                <div class="image"><img src="../static/witcher.jpg" alt="" class="image">
+                </div>
+                <div class="sub_heading">Ankit Kumar Yadav</div>
+                <div class="sub_text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</div>
+            </div>
+        </div>
+    </div>
+    
+    
+    <!-- <div class="counter_container">
+        <div class="counter_inner" id="counter_inner1">
+            <div class="counter">233</div>
+            <div class="info">Projects</div>
+        </div>
+        <div class="counter_inner" id="counter_inner2">
+            <div class="counter" id="counter">0</div>
+            <div class="info">Customers</div>
+        </div>
+        <div class="counter_inner" id="counter_inner3">
+            <div class="counter">7</div>
+            <div class="info">Companies</div>
+        </div>
+        <div class="counter_inner" id="counter_inner4">
+            <div class="counter">4</div>
+            <div class="info">Experience</div>
+        </div>
+    </div> -->
+    
+    <div class="container2" id="about">
+        <div class="about_heading_container">
+            <div class="about_heading">ABOUT</div>
+        </div>
+    
+        <div class="underline"></div>
+    
+        <div class="about_text_outer">
+            <div class="about_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi ducimus sunt
+                fugit. Dolor totam, modi impedit tenetur beatae eaque quae vero quam distinctio omnis iusto id magni
+                laboriosam fugiat adipisci Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, deleniti.
+            </div>
+        </div>
+    
+        <div class="about_box_container">
+            <div class="about_box" id="about_box1">
+                <div class="about_inner">
+                    <div class="about_image_container">
+                        <img src="../static/witcher.jpg" alt="" class="about_image">
+                    </div>
+                    <div class="about_inner_heading">Extracting Frames</div>
+                    <div class="about_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe qui
+                        quae quia nisi et corrupti doloribus nemo eius odio magnam!</div>
+                </div>
+            </div>
+            <div class="about_box" id="about_box2">
+                <div class="about_inner">
+                    <div class="about_image_container">
+                        <img src="../static/witcher.jpg" alt="" class="about_image">
+                    </div>
+                    <div class="about_inner_heading">Clustering Images</div>
+                    <div class="about_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe qui
+                        quae quia nisi et corrupti doloribus nemo eius odio magnam!</div>
+                </div>
+            </div>
+            <div class="about_box" id="about_box3">
+                <div class="about_inner">
+                    <div class="about_image_container">
+                        <img src="../static/witcher.jpg" alt="" class="about_image">
+                    </div>
+                    <div class="about_inner_heading">Character Interaction Graph</div>
+                    <div class="about_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe qui
+                        quae quia nisi et corrupti doloribus nemo eius odio magnam!</div>
+                </div>
+            </div>
+            <div class="about_box" id="about_box3">
+                <div class="about_inner">
+                    <div class="about_image_container">
+                        <img src="../static/witcher.jpg" alt="" class="about_image">
+                    </div>
+                    <div class="about_inner_heading">Scoring Frames</div>
+                    <div class="about_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe qui
+                        quae quia nisi et corrupti doloribus nemo eius odio magnam!</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="main_page.js"></script>
+
 </body>
 </html>
