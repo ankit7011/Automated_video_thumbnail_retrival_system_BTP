@@ -3,7 +3,9 @@
   <head>
     <meta charset="UTF-8">
     <title>Best Thumbnail</title>
-    <style>
+    <!-- <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}"> -->
+    <link rel="stylesheet" href="../static/CSS/play.css">
+    <!-- <style>
       body {
         background-color: #FFE4B5;
       }
@@ -45,24 +47,51 @@
         border-top-right-radius: 10px; /* round the top-right corner of the container */
         overflow: hidden; /* hide any content outside the container */
       }
-    </style>
+    </style> -->
   </head>
   <body>
-    <h1 style="text-align:center;">Best Thumbnail</h1>
-    <div style="text-align:center;">
-      <img src="{{ url_for('static', filename='images/' + filename) }}" alt="Image">
+
+    <div class="landing_page" id="landing_page">
+      <div class="content3">
+        <div class="content_box_outerbox">
+        <div class="content_box">
+          <div class="catch_phrase" id="catch_phrase">
+            <span>Best Thumbnail</span>
+          </div>
+          
+          <div class="container1">
+            <!-- <div class="stuff_picture"> -->
+              <img class="stuff_picture" src="{{ url_for('static', filename='images/' + filename) }}" alt="Image">
+              <!-- <img class="stuff_picture" src="../static/witcher.jpg" /> -->
+            <!-- </div> -->
+          </div>
+
+          <div class="explore_button_box">
+            <button class="explore_button" onclick="redirectToExample()">Character Interaction Graph</button>
+            <button class="explore_button" onclick="redirectToHome()">Home Page</button>
+          </div>
+        </div>
+
+      </div>
+      
+      </div>
+      <!-- <div class="container1" id="team">
+        <div class="stuff_picture">
+          <img src="{{ url_for('static', filename='images/' + filename) }}" alt="Image" id="stuff_landing_page">
+        </div>
+      </div> -->
     </div>
-    <div style="text-align:center;">
-      <button onclick="redirectToExample()">Click to see the Character interaction Graph</button>
-      <button onclick="redirectToHome()">Go to Home Page</button>
-      <script>
-        function redirectToExample() {
-          window.location.href = "character_graph";
-        }
-        function redirectToHome() {
-          window.location.href = "/";
-        }
-      </script>
-    </div>
+
+    
+
+    <script>
+      function redirectToExample() {
+        window.location.href = "character_graph";
+      }
+      function redirectToHome() {
+        window.location.href = "/";
+      }
+    </script>
+
   </body>
 </html>

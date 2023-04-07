@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automated Video Thumbnail Retrival</title>
     
-    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}" >
+    <!-- <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='style.css')}}" > -->
+    <link rel="stylesheet" href="../static/CSS/style.css">
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script type="text/javascript">
@@ -52,7 +53,7 @@
                         <!-- <button class="explore_button">Upload</button> -->
                         <form action="/upload" method="POST" enctype="multipart/form-data">
                             <input class="explore_button" type="file" name="video" id="video">
-                            <button class="explore_button edited" type="submit">Upload</button>
+                            <button style="cursor: pointer;" class="explore_button edited" type="submit">Upload</button>
                         </form>
                     </div>
     

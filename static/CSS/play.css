@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap');
+
+html {
+    scroll-behavior: smooth;
+
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    /* font-family: 'Rubik', sans-serif; */
+    font-family: "Lato", sans-serif;
+    overflow-x: hidden;
+    background-color: #F9F8FF;
+}
+
+:root {
+    --background_color: #f6fafa;
+    --heading_color: #31343C;
+    --navbar_color: white;
+    --navbar_shadow: #e9e7e7;
+    --navbar_hover: grey;
+    --navbar_links: black;
+
+}
+
+.landing_page {
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    background-image: linear-gradient(to bottom, var(--background_color), #fafafd);
+    overflow: hidden;
+    /* border: 2px solid red; */
+}
+
+.content3 {
+    padding: 4%;
+    /* border: 2px solid red; */
+    height: auto;
+    min-height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.catch_phrase {
+    font-weight: 600;
+    font-size: 5rem;
+    color: var(--heading_color);
+    letter-spacing: 1.3px;
+    padding: 15px 0px;
+    text-align: start;
+    width: max-content;
+    /* border: 2px solid red; */
+}
+
+.explore_button {
+    padding: 18px 60px;
+    /* padding-bottom: 42px; */
+    background-color: rgb(83, 103, 255);
+    font-weight: bold;
+    font-size: 3rem;
+    color: white;
+    border-radius: 0.5rem;
+    margin: 25px 10px;
+    letter-spacing: 2px;
+    border: none;
+    cursor: pointer;
+    /* border:2px solid red;  */
+}
+
+.container1 {
+    background-color: white;
+    box-shadow: 1px 1px 25px 1px #e7e7e7;
+    padding: 3.5rem 0rem;
+    width: 78%;
+    /* min-height: 360px; */
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 13px;
+    margin: auto;
+    margin-top: -3rem;
+}
+
+.stuff_picture {
+    /* border: 2px solid red; */
+    object-fit: cover;
+    height: 85%;
+    width: 85%;
+    /* width: min-content; */
+}
