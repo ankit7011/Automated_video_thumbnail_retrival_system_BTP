@@ -71,28 +71,28 @@
         <div class="team_us_heading">Team Behind This Project</div>
         <div class="sub_container">
             <div class="sub_inner">
-                <div class="image"><img src="../static/witcher.jpg" alt=""
-                        class="image"></div>
-                <div class="sub_heading">Aniket Gupta</div>
-                <div class="sub_text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</div>
+                <div class="image"><img src="../static/images/aniket.png" alt=""
+                        class="real_image"></div>
+                <div class="sub_heading">Aniket Gupta <br />2019UCO1663</div>
+                <!-- <div class="sub_text">2019UCO1663</div> -->
             </div>
             <div class="sub_inner">
-                <div class="image"><img src="../static/witcher.jpg" alt="" class="image">
+                <div class="image"><img src="../static/images/Shreyans.png" alt="" class="real_image">
                 </div>
-                <div class="sub_heading">Shreyans Jain</div>
-                <div class="sub_text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</div>
+                <div class="sub_heading">Shreyans Jain <br />2019UCO1659</div>
+                <!-- <div class="sub_text">2019UCO1659</div> -->
             </div>
             <div class="sub_inner">
-                <div class="image"><img src="../static/witcher.jpg" alt="" class="image">
+                <div class="image"><img src="../static/images/nikhil.png" alt="" class="real_image">
                 </div>
-                <div class="sub_heading">Nikhil Grewal</div>
-                <div class="sub_text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</div>
+                <div class="sub_heading">Nikhil Grewal <br />2019UCO1702</div>
+                <!-- <div class="sub_text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</div> -->
             </div>
             <div class="sub_inner">
-                <div class="image"><img src="../static/witcher.jpg" alt="" class="image">
+                <div class="image"><img src="../static/images/ankit.png" alt="" class="real_image">
                 </div>
-                <div class="sub_heading">Ankit Kumar Yadav</div>
-                <div class="sub_text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</div>
+                <div class="sub_heading">Ankit Kumar Yadav <br />2019UCO1712</div>
+                <!-- <div class="sub_text">Lorem ipsum dolor sit, amet consectetur adipisicing elit.</div> -->
             </div>
         </div>
     </div>
@@ -125,9 +125,10 @@
         <div class="underline"></div>
     
         <div class="about_text_outer">
-            <div class="about_text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eligendi ducimus sunt
-                fugit. Dolor totam, modi impedit tenetur beatae eaque quae vero quam distinctio omnis iusto id magni
-                laboriosam fugiat adipisci Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni, deleniti.
+            <div class="about_text">
+                Given a long format video, our goal is to rank the frames of the video in terms of their suitability of being a video
+                thumbnail candidate. We will score each frame of the video in terms of its suitability to being a thumbnail candidate,
+                and select the best frame as the thumbnail of the video.
             </div>
         </div>
     
@@ -135,41 +136,45 @@
             <div class="about_box" id="about_box1">
                 <div class="about_inner">
                     <div class="about_image_container">
-                        <img src="../static/witcher.jpg" alt="" class="about_image">
+                        <img src="../static/images/frame.png" alt="" class="about_image">
                     </div>
-                    <div class="about_inner_heading">Extracting Frames</div>
-                    <div class="about_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe qui
-                        quae quia nisi et corrupti doloribus nemo eius odio magnam!</div>
+                    <div class="about_inner_heading"><br>Extracting Frames</div>
+                    <div class="about_content">We have extracted frames from the video (720 x 1080).The video taken for demonstration is 30fps and we have collected
+                    every fourth frame from the video.</div>
                 </div>
             </div>
             <div class="about_box" id="about_box2">
                 <div class="about_inner">
                     <div class="about_image_container">
-                        <img src="../static/witcher.jpg" alt="" class="about_image">
+                        <img src="../static/images/Clustering.png" alt="" class="about_image">
                     </div>
-                    <div class="about_inner_heading">Clustering Images</div>
-                    <div class="about_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe qui
-                        quae quia nisi et corrupti doloribus nemo eius odio magnam!</div>
+                    <div class="about_inner_heading"><br>Clustering Faces</div>
+                    <div class="about_content">All the faces collected using the MTCNN model are clustered using the Agglomerative Clustering algorithm, with centroid
+                    linkage for calculating distance between clusters.</div>
                 </div>
             </div>
             <div class="about_box" id="about_box3">
                 <div class="about_inner">
                     <div class="about_image_container">
-                        <img src="../static/witcher.jpg" alt="" class="about_image">
+                        <img src="../static/images/Character_interaction.png" alt="" class="about_image">
                     </div>
-                    <div class="about_inner_heading">Character Interaction Graph</div>
-                    <div class="about_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe qui
-                        quae quia nisi et corrupti doloribus nemo eius odio magnam!</div>
+                    <div class="about_inner_heading"><br>Character Interaction Graph</div>
+                    <div class="about_content">
+                        This helps in registering the interaction between characters that
+                        will account for a score in deciding whether to choose them for the thumbnail.
+                    </div>
                 </div>
             </div>
             <div class="about_box" id="about_box3">
                 <div class="about_inner">
                     <div class="about_image_container">
-                        <img src="../static/witcher.jpg" alt="" class="about_image">
+                        <img src="../static/images/score.png" alt="" class="about_image">
                     </div>
-                    <div class="about_inner_heading">Scoring Frames</div>
-                    <div class="about_content">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe qui
-                        quae quia nisi et corrupti doloribus nemo eius odio magnam!</div>
+                    <div class="about_inner_heading"><br>Scoring Frames</div>
+                    <div class="about_content">
+                        We have calculated 3 scores, prominence score, expression score and landscape score, which 
+                        helps in getting the best thumbnails for the video.
+                    </div>
                 </div>
             </div>
         </div>

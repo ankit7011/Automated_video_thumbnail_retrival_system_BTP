@@ -237,7 +237,8 @@ body {
 
 .sub_heading {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  padding-bottom: 1rem;
+  padding: 1rem;
+  margin-left: 0.4rem;
   text-align: center;
   color: #31343C;
   font-size: 1.1rem;
@@ -263,14 +264,38 @@ body {
 
 .sub_inner {
   flex-basis: 24%;
+  /* border: 2px solid red; */
+  margin: 1px;
 }
 
 .image {
-  height: 2rem;
-  width: 2rem;
-  /* border: 2px solid black; */
   margin: auto;
+  width: 50%;
+  /* border: 3px solid green; */
+  padding: 10px;
+  overflow: hidden;
 }
+
+.real_image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 140%;
+  background-size: contain;
+}
+
+/* .image {
+  width: 2rem;
+  height: auto;
+  /* border: 2px solid red; 
+  margin-left: 50px;
+}
+.real_image {
+  height: 170px;
+  width: auto;
+  background-size: cover;
+  margin: 20px;
+} */
 
 @media only screen and (max-width: 1500px) {
   .sub_inner {
@@ -419,8 +444,9 @@ body {
 
 .about_image {
   /* margin: auto; */
-  width: 150px;
-  height: 150px;
+  width: 400px;
+  height: auto;
+  background-size: contain;
 }
 
 .about_inner {
