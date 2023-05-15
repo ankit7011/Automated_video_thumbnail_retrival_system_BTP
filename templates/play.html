@@ -60,10 +60,11 @@
           </div>
           
           <div class="container1">
-            <!-- <div class="stuff_picture"> -->
-              <img class="stuff_picture" src="{{ url_for('static', filename='images/' + filename) }}" alt="Image">
-              <!-- <img class="stuff_picture" src="../static/witcher.jpg" /> -->
-            <!-- </div> -->
+          {% for name in filenames %}
+              
+              <img src="{{ url_for('static', filename='images/' + name) }}" alt="Image">
+          {% endfor %}
+
           </div>
 
           <div class="explore_button_box">
@@ -75,11 +76,6 @@
       </div>
       
       </div>
-      <!-- <div class="container1" id="team">
-        <div class="stuff_picture">
-          <img src="{{ url_for('static', filename='images/' + filename) }}" alt="Image" id="stuff_landing_page">
-        </div>
-      </div> -->
     </div>
 
     

@@ -2,17 +2,30 @@ from silence_tensorflow import silence_tensorflow
 silence_tensorflow()
 import cv2
 from PIL import Image
-import os
-import numpy as np
-import pandas as pd
 import matplotlib.pyplot as plt
-import pickle as pk
 from clustimage import Clustimage
 from pyvis.network import Network
 import tensorflow as tf
-from mtcnn.mtcnn import MTCNN
 import os
-import shutil
+import numpy as np
+import pandas as pd
+import math
+from keras import Model
+from sklearn.decomposition import PCA
+from mtcnn.mtcnn import MTCNN
+import pickle as pk
+from clustimage import Clustimage
+import networkx as nx
+from brisque import BRISQUE
+from keras.applications.vgg16 import VGG16 
+from keras.models import Model
+import keras.utils as image
+# from keras.preprocessing.image import load_img 
+# from keras.preprocessing import image
+
+from keras.applications.vgg16 import preprocess_input 
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
 
 def get_frames(path, num):
     
@@ -222,18 +235,73 @@ def ei_total(frame):
     
     return scores_ei
 
-def predict(video_path):
+# def predict_old(video_path):
     
-    print('-------Extracting frames--------')
-    frames = get_frames(video_path, num_frames)
-    print('-------Extracting face data------')
-    faces = get_face_data(frames)
+#     print('-------Extracting frames--------')
+#     frames = get_frames(video_path, num_frames)
+#     print('-------Extracting face data------')
+#     faces = get_face_data(frames)
 
-    with open('./faces.pkl', 'wb') as f:
-        pk.dump(faces, f)
+#     with open('./faces.pkl', 'wb') as f:
+#         pk.dump(faces, f)
 
-    print('--------Storing extracted faces-------')
-    save_face(faces)
+#     print('--------Storing extracted faces-------')
+#     save_face(faces)
+
+#     ##PART 2 - Clustering
+#     print('--------Clustering data-----------')
+#     cl = Clustimage()
+#     results = cl.fit_transform('./faces',cluster='agglomerative', evaluate='dbindex', linkage = 'centroid', max_clust = 20)
+
+#     print('--------Extracting frame data-----------')
+#     frame = frame_data(cl, faces)
+#     with open('frame_data.pkl', 'wb') as f:
+#         pk.dump(frame, f)
+#     char_prom = dict(pd.value_counts(cl.results['labels']))
+
+#     ##PART 3 - GRAPH
+#     print('-------Creating Graph---------')
+#     graph_wts = graph_weights(frame)
+#     create_graph(cl, char_prom, graph_wts)
+
+#     ##PART 4 - SCORE
+#     print('-------Scoring Frames--------')
+#     scores_pi = get_pi(frame, graph_wts, char_prom)
+#     scores_ei = ei_total(frame)
+
+#     scores = []
+#     for i in range(len(scores_pi)):
+#         s = (scores_pi[i][0] + 100 * scores_ei[i][0]) / 101
+#         scores.append((s, scores_pi[i][1]))
+    
+#     a = sorted(scores, reverse = True)
+#     t10 = []
+#     m = min(16, len(a))
+#     for i in a[:m]:
+#         t10.append(i[1])
+
+#     paths = []
+#     for i in range(m):
+#         # tpath = './frame/' + str(t10[i]) + '.jpg' # original by aniket
+#         tpath = './images/' + str(t10[i]) + '.jpg'  # by ankit
+#         paths.append(tpath)
+
+#     print(paths)
+
+#     print('-------Displaying top frames---------')
+#     space = plt.figure(figsize = (20,20))     
+#     for i in range(m):
+#         ax = space.add_subplot(4,4,i+1)    
+#         ax.imshow(frames[t10[i]][...,::-1])
+#     trimmed_name = video_path[:-4]
+#     plt.savefig('static/images/'+trimmed_name + ".png")
+#     # plt.show()
+
+#     return paths
+
+def predict(frames,faces,video_path):
+    
+    print("i am in predict")
 
     ##PART 2 - Clustering
     print('--------Clustering data-----------')
@@ -280,25 +348,185 @@ def predict(video_path):
     for i in range(m):
         ax = space.add_subplot(4,4,i+1)    
         ax.imshow(frames[t10[i]][...,::-1])
+    plt.savefig('output.jpg')
     trimmed_name = video_path[:-4]
-    plt.savefig('static/images/'+trimmed_name + ".png")
-    # plt.show()
-
+    plt.savefig('static/images/'+trimmed_name + "char.png")
     return paths
 
 
+#-----------------------Added Non - char -------------------
+
+
+def extract_features(file, model):
+    img = image.load_img(file, target_size=(224,224))
+    img = np.array(img) 
+    reshaped_img = img.reshape(1,224,224,3) 
+    imgx = preprocess_input(reshaped_img)
+    features = model.predict(imgx, use_multiprocessing=True)
+    return features
+
+
+def no_char_data():
+    
+    data = {}
+    for f in os.listdir('./no_char'):
+        path = './no_char/' + f 
+        feat = extract_features(path,model)
+        data[f] = feat
+        
+    return data
+
+def pca_data(data):
+    
+    filenames = np.array(list(data.keys()))
+    feat = np.array(list(data.values()))
+    feat = feat.reshape(-1,4096)
+    # reduce the amount of dimensions in the feature vector
+    pca = PCA(n_components=min(feat.shape[0], feat.shape[1]))
+    x = pca.fit_transform(feat)
+    
+    return x
+
+def cluster_data(x):
+    kmeans = KMeans(n_clusters=5)
+    kmeans.fit(x)
+    return kmeans
+
+def create_dicts(data, kmeans):
+    groups = {}
+    filenames = np.array(list(data.keys()))
+    for file, cluster in zip(filenames,kmeans.labels_):
+        if cluster not in groups.keys():
+            groups[cluster] = []
+            groups[cluster].append(file)
+        else:
+            groups[cluster].append(file)
+    img_to_clust = {}
+    for g in groups.keys():
+        for i in groups[g]:
+            a = int(i.split()[0])
+            img_to_clust[a] = g
+        
+    return groups, img_to_clust
+
+def pi_score_nonchar(groups, img_to_clust,no_char):
+    
+    pi_scores = {}
+    for i in no_char.keys():
+        clust = img_to_clust[i]
+        num = len(groups[clust])
+        pi_scores[i] = num / len(no_char.keys())
+        
+    return pi_scores
+
+def li_score(no_char):
+    
+    li_scores = {}
+    for i in no_char.keys():
+        s = obj.score(no_char[i])
+        if math.isnan(s):
+            s = 150
+        li = 1 - s/150
+        li_scores[i] = li
+    
+    return li_scores
+
+def predict_nochar(no_char,frames,video_path):
+    print("i am in non-char-predict")
+    data = no_char_data()
+    x = pca_data(data)
+    kmeans = cluster_data(x)
+    groups, img_to_clust = create_dicts(data, kmeans)
+    pi_scores = pi_score_nonchar(groups, img_to_clust,no_char)
+    li_scores = li_score(no_char)
+    
+    scores = []
+
+    for i in li_scores.keys():
+        l = li_scores[i]
+        p = pi_scores[i]
+        s = (l + 10*p) / 11
+        scores.append((s, i))
+        
+
+    a = sorted(scores, reverse = True)
+    t10 = []
+    m = min(16, len(a))
+    for i in a[:m]:
+        t10.append(i[1])
+
+    paths = []
+    for i in range(m):
+        tpath = './frame/' + str(t10[i]) + '.jpg'
+        paths.append(tpath)
+
+    print(paths)
+
+    print('-------Displaying top frames---------')
+    space = plt.figure(figsize = (20,20))     
+    for i in range(m):
+        ax = space.add_subplot(4,4,i+1)    
+        ax.imshow(frames[t10[i]][...,::-1])
+    plt.savefig('output_nochar.jpg')
+    trimmed_name = video_path[:-4]
+    plt.savefig('static/images/'+trimmed_name + "non_char.png")
+
+    return paths
+
+    
+
+def basic(video_path, num_frames):
+    print("i am in basic")
+    print('-------Extracting frames--------')
+    frames = get_frames(video_path, num_frames)
+    print('-------Extracting face data------')
+    faces = get_face_data(frames)
+
+    with open('./faces.pkl', 'wb') as f:
+        pk.dump(faces, f)
+
+
+    # with open('./faces.pkl', 'rb') as f:
+    #     faces = pk.load(f)
+
+    print('--------Storing extracted faces-------')
+    save_face(faces)
+
+    no_char = {}
+    for i in faces.keys():
+        if faces[i] == []:
+            no_char[i] = frames[i]
+
+    if 'no_char' not in os.listdir():
+        os.mkdir('no_char')
+    os.chdir('no_char')
+
+    for i in no_char.keys():
+        name = str(i) + ' .png'
+        cv2.imwrite(name, no_char[i])
+
+    os.chdir('..')
+
+    return frames, faces, no_char
 
 
 
 # #INIT VARIABLES
 basepath = os.getcwd()
 ei_model = tf.keras.models.load_model(basepath + '/ei_score.h5')
-num_frames = 100
+num_frames = 50
 
 
 face_locations = []
 detector = MTCNN()
 area_frame = 720 * 1080
+
+#new 
+
+model = VGG16()
+model = Model(inputs = model.inputs, outputs = model.layers[-2].output)
+obj = BRISQUE(url=False)
+
 
 
 #--------------------------------------------------------------------Flask--------------------------------------------------------
@@ -322,10 +550,15 @@ def upload():
     filename = file.filename
     file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
 
-    paths = predict(filename)
+    frames, faces, no_char = basic(filename, num_frames)
+    paths = predict(frames,faces,filename)
+    paths_nochar = predict_nochar(no_char,frames,filename)
+
     print("My New Path is ",filename) 
-    trimmed_name = filename[:-4] + '.png'
-    return render_template('play.html', filename=trimmed_name)
+    trimmed_name_char = filename[:-4] + 'char.png'
+    trimmed_name_nonchar = filename[:-4] + 'non_char.png'
+    filenames=[trimmed_name_char,trimmed_name_nonchar]
+    return render_template('play.html', filenames=filenames)
 
 @app.route('/character_graph')
 def example():
